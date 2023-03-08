@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoinClicker Mini</title>
+    <title>Banan-spil</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,45 +14,63 @@
         <div id="game">
             <div id="game_background"></div>
             <div id="game_elements">
-                <div id="coin1_container">
-                    <img id="coin1_sprite" src="images/coin.svg" alt="mønt">
+                <div id="banana1_container">
+                    <img id="banana1_sprite" src="images/banana1.png" alt="mønt">
                 </div>
-                <div id="coin2_container" class="falling">
-                    <img id="coin2_sprite" src="images/coin.svg" alt="mønt">
+                <div id="banana2_container">
+                    <img id="banana2_sprite" src="images/banana1.png" alt="mønt">
                 </div>
-                <div id="coin3_container" class="falling">
-                    <img id="coin3_sprite" src="images/coin.svg" alt="mønt">
+                <div id="banana3_container">
+                    <img id="banana3_sprite" src="images/banana1.png" alt="mønt">
                 </div>
 
-                <div id="bomb_container">
-                    <img id="bomb_sprite" src="images/bomb.svg" alt="bombe">
+                <div id="snake_container">
+                    <img id="snake_sprite" src="images/snake.png" alt="bombe">
                 </div>
 
                 <div id="heart_container">
-                    <img id="heart_sprite" class="falling" src="images/heart.svg" alt="hjerte">
+                    <img id="heart_sprite" src="images/heart.svg" alt="hjerte">
                 </div>
 
             </div>
             <div id="game_ui">
                 <div id="score_board">
-                    <span id="coin_count">0</span>
-                    <img id="coin_image" src="images/coin.svg">
+                    <span id="point_count">0</span>
+                    <img id="point_image" src="images/banana1.png">
                 </div>
-                <div id="life_board">                    
+                <div id="life_board">
                     <img id="heart1" src="images/heart.svg" class="active_heart">
                     <img id="heart2" src="images/heart.svg" class="active_heart">
                     <img id="heart3" src="images/heart.svg" class="active_heart">
                 </div>
                 <div id="time_board">
+                    <div id="time_container">
+                        <div id="time_sprite" class=""></div>
                     <div id="time_left"></div>
                 </div>
             </div>
         </div>
-        <div id="start" class="hidden"></div>
-        <div id="game_over" class="hidden"></div>
-        <div id="level_complete" class="hidden"></div>
+        <div id="start">
+            <h2>Banan-spillet! 🍌</h2>
+            <p>Saml 10 bananer inden timeren løber ud
+                <br> Pas på slangerne!
+            </p>
+            <button id="btn_start" class="pulse">Start</button>
+        </div>
+        <div id="game_over" class="hidden">
+            <h2>Du tabte!😢</h2>
+            <button id="btn_spiligen" class="pulse">Spil igen</button>
+        </div>
+        <div id="level_complete" class="hidden">
+            <h2>Level Complete 🎉</h2>
+            <button id="btn_back" class="pulse">Spil igen</button>
     </div>
-
+    <audio id="snake_sound" src="sounds/snake.wav" ></audio>
+    <audio id="banana_sound" src="sounds/banana.mp3" ></audio>
+    <audio id="life_sound" src="sounds/life.wav" ></audio>
+    <audio id="sound_jungle" src="sounds/jungle.mp3" ></audio>
+    <audio id="sound_win" src="sounds/win.wav" ></audio>
+    <audio id="sound_lose" src="sounds/lose.wav" ></audio>
     <script src="script.js"></script>
 </body>
 

@@ -1,5 +1,10 @@
 body {
     margin: 0;
+    font-family: sans-serif;
+}
+
+h2 {
+    font-size: 4em;
 }
 
 #screen {
@@ -11,79 +16,128 @@ body {
 
 #game {
     grid-area: 1 / 1;
-       
+
     display: grid;
     grid-template: 100% / 100%;
 }
 
 #game_background {
     grid-area: 1 /1;
-    
-    background-image: linear-gradient(150deg, #20c903 0%, #09793b 100%);
+
+    background-image: url(images/749.jpg);
+    background-size: cover;
 }
 
 #game_elements {
-     grid-area: 1 /1;
-     overflow: hidden;
-     position: relative;
+    grid-area: 1 /1;
+    overflow: hidden;
+    position: relative;
+}
+
+#game_over {
+    grid-area: 1 /1;
+    z-index: 999;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    background-image: linear-gradient(150deg, #6d03c9 0%, #790909 100%);
+    color: #ffffff;
+}
+
+#level_complete,
+#start {
+    grid-area: 1 /1;
+    z-index: 999;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    background-image: linear-gradient(150deg, #20c903 0%, #09793b 100%);
+    color: #ffffff;
+}
+
+.hidden,
+#game_over.hidden,
+#level_complete.hidden, #start.hidden{
+    display: none;
 }
 
 /* positioning elements */
 
-#coin1_container {
+#banana1_container {
     position: absolute;
-    
+
     top: 0;
-    left: 10vw;
+    width: 20%;
 }
 
-#coin1_sprite {
-    width: 100%;   
-}
-
-#coin2_container {
-    position: absolute;
-    
-    top: 0;
-    left: 40vw;
-}
-
-#coin2_sprite {
+#banana1_sprite {
     width: 100%;
 }
 
-#coin3_container {
+#banana2_container {
     position: absolute;
-    
+
     top: 0;
-    left: 70vw;
+    width: 20%;
 }
 
-#coin3_sprite {
+#banana2_sprite {
     width: 100%;
 }
 
-#bomb_container {
+#banana3_container {
     position: absolute;
-    
+
     top: 0;
-    left: 30vw;
+    width: 20%;
 }
 
-#bomb_sprite {
+#banana3_sprite {
     width: 100%;
+}
+
+#snake_container {
+    position: absolute;
+
+    top: 0;
+}
+
+#snake_sprite {
+    width: 60%;
 }
 
 #heart_container {
     position: absolute;
-    
+
     top: 0;
-    left: 55vw;
 }
 
 #heart_sprite {
     width: 100%;
 }
+
+/* position af klasser */
+
+.position1 {
+    left: 10vw;
+}
+
+.position2 {
+    left: 40vw;
+}
+
+.position3 {
+    left: 70vw;
+}
+
+.position4 {
+    left: 55vw;
+}
+
+.position5 {
+    left: 30vw;
+}
+
 
 
 /* UI */
@@ -92,30 +146,29 @@ body {
     top: 2vw;
     right: 1vw;
     color: white;
-    
+
     font-size: 2em;
-    font-family: sans-serif;
-    
+
     pointer-events: none;
 }
 
 #score_board {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: .1em
+    gap: 0.1em;
 }
 
-#coin_count {
+#point_count {
     white-space: nowrap;
     text-align: right;
 }
 
-#coin_image {
+#point_image {
     width: 1em;
 }
 
 #life_board {
-    margin-block-start: .2em;
+    margin-block-start: 0.2em;
     display: grid;
     grid-template-columns: 1.2em 1.2em 1.2em;
 }
@@ -125,11 +178,11 @@ body {
 }
 
 .active_heart {
-   filter: drop-shadow(0 0 2px yellow);
+    filter: drop-shadow(0 0 2px yellow);
 }
 
 .broken_heart {
-    filter: grayscale(75%) blur(.5px);
+    filter: grayscale(75%) blur(0.5px);
 }
 
 /* Animations */
@@ -143,11 +196,11 @@ body {
 
 @keyframes falling {
     0% {
-        transform: translate(0,-100%);
+        transform: translate(0, -100%);
     }
 
     100% {
-        transform: translate(0,56.25vw);
+        transform: translate(0, 56.25vw);
     }
 }
 
@@ -176,14 +229,14 @@ body {
 
 @keyframes zoom_in {
     0% {
-        transform: translate(0,0) scale(1) rotate(0deg);
-    }    
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
     90% {
-        transform: translate(100%,0) scale(15) rotate(90deg);
+        transform: translate(100%, 0) scale(15) rotate(90deg);
         opacity: 1;
     }
     100% {
-        transform: translate(100%,0) scale(15) rotate(90deg);
+        transform: translate(100%, 0) scale(15) rotate(90deg);
         opacity: 0;
     }
 }
@@ -209,19 +262,54 @@ body {
     animation-play-state: paused;
 }
 
-.hide_heart {
-    display: none;
+/* Timer */
+
+#time_board {
+    position: relative;
 }
 
+#time_container {
+    position: absolute;
+    width: 100%;
+    aspect-ratio: 30/6;
+    border: 2px solid black;
+    background-color: rgba(208, 204, 204, 0.383);
+    top: 1.6vh;
+    right: 0.2vw;
+}
 
+#time_sprite {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: limegreen;
+    transform-origin: right;
+}
 
+/* ------------ TIMER ANIMATIONER ------------ */
 
+.shrink {
+    animation-name: shrink_kf;
+    animation-duration: 15s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
 
-
-
-
-
-
+@keyframes shrink_kf {
+    0% {
+        scale: 1 1;
+        background-color: limegreen;
+    }
+    50% {
+        background-color: rgb(255, 230, 0);
+    }
+    100% {
+        scale: 0 1;
+        background-color: red;
+    }
+}
+  
 
 
 
